@@ -53,14 +53,8 @@ function wagesEarnedOnDate(employee, date){
 }
 
 function allWagesFor(employee){
-    sum = 0;
-    for(let i = 0; i<=employee.timeInEvents.length; i++){
-        let wages = wagesEarnedOnDate(employee, employee.timeInEvents[i]);
-        //var sum = 0;
-        sum += wages;
-        
-    }
-    return sum;
+    let pay = wagesEarnedOnDate;
+    return employee.reduce(pay);
 }
 // function calculatePayroll([employee]){
 //     let totalPay = 0;
