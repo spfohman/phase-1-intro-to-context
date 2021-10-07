@@ -43,8 +43,14 @@ function createTimeOutEvent(employee, timeOut){
     return employee;
 }
 function hoursWorkedOnDate(employee, date){
-    let hours = (employee.timeOutEvents[0].hour - employee.timeInEvents[0].hour)/100;
-    return hours;
+    
+    let timeIn = employee.timeInEvents.find(e=>{
+        return e.date===date;
+    })
+    let timeOut= employee.timeOutEvents.find(e=>{
+        return e.date===date;
+    })
+    return (timeOut.hour-timeIn.hour)/100;
 }
 function wagesEarnedOnDate(employee, date){
     let hours = hoursWorkedOnDate(employee, date)
@@ -52,16 +58,18 @@ function wagesEarnedOnDate(employee, date){
     return pay;
 }
 
+
 function allWagesFor(employee){
-    let pay = wagesEarnedOnDate;
-    return employee.reduce(pay);
-}
-// function calculatePayroll([employee]){
-//     let totalPay = 0;
-//     for (n of employee){
-//         const pay = wagesEarnedOnDate(employee, date);
-//         totalPay+=pay;
-//     }
     
-//     return totalPay;
-// }
+    let dates = employee.timeInEvents.map((element)=>{
+        return element.date;})
+   let payable = dates.reduce((x, y) =>{
+        return x + wagesEarnedOnDate(employee, y);
+   },0)
+   return payable;
+}
+function calculatePayroll(employeeRecords){
+    for(let i of employeeRecords){
+        console.log(i);
+    }
+}
