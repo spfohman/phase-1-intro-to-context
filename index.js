@@ -69,7 +69,7 @@ function allWagesFor(employee){
    return payable;
 }
 function calculatePayroll(employeeRecords){
-    for(let i of employeeRecords){
-        console.log(i);
-    }
+    return employeeRecords.reduce(function(memo, e){
+        return memo + allWagesFor(e)
+    })
 }
